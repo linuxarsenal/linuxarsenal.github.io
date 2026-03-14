@@ -37,13 +37,22 @@ There is currently **no test suite** configured for this project. The npm test s
 pnpm test  # Echoes "Error: no test specified" and exits with code 1
 ```
 
-To run a single test (when tests are added), typically use:
+### Linting
+No linting is configured for this project.
+
+### Running a Single Test (when tests are added)
 ```bash
+# Generic approach
 pnpm test -- <test-file>
-# or with vitest
+
+# With vitest
 pnpm vitest run <test-file>
-# or with jest
+
+# With jest
 pnpm jest <test-file>
+
+# With mocha
+pnpm mocha <test-file>
 ```
 
 ---
@@ -54,6 +63,7 @@ pnpm jest <test-file>
 - Keep configuration files minimal and well-organized
 - Use ESM syntax (`import`/`export`) in config files
 - Follow VuePress 2 best practices from official documentation
+- Write clean, readable code with descriptive names
 
 ### Configuration File (config.js)
 
@@ -99,6 +109,13 @@ import { bar } from './local-module'
 - VuePress handles most errors during build
 - Check console output for configuration issues
 - Verify all referenced files exist before building
+- Use try-catch in any custom JavaScript plugins
+
+### Markdown Content Guidelines
+- Use frontmatter for page metadata (title, description, date)
+- Keep headings hierarchical (H1 -> H2 -> H3)
+- Use relative links for internal navigation
+- Code blocks should specify language for syntax highlighting
 
 ### GitHub Actions Workflow
 The project uses GitHub Actions (`.github/workflows/docs.yml`):
@@ -143,3 +160,5 @@ The project uses GitHub Actions (`.github/workflows/docs.yml`):
 - No linting configured
 - Custom theme modifications should be added to `docs/.vuepress/styles/`
 - Frontmatter in markdown files controls page metadata (title, description, etc.)
+- Always test changes locally with `pnpm docs:dev` before committing
+- Clear `.cache` and `.temp` folders if you encounter build issues

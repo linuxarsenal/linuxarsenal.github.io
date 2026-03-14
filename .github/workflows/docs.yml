@@ -8,6 +8,13 @@ on:
 jobs:
   docs:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.url }}
+    permissions:
+      contents: write
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - uses: actions/checkout@v4
@@ -26,12 +33,13 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build VuePress site
         run: pnpm docs:build
 
       - name: Deploy to GitHub Pages
+        id: deploy
         uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: gh-pages
