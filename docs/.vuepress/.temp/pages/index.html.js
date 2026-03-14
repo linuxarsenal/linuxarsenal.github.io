@@ -1,0 +1,3 @@
+import comp from "D:/Workspace/GithubFiles/Github/MyBlogMarkdown/MyBlogMarkdown/BlogSite/vuepress-starter/docs/.vuepress/.temp/pages/index.html.vue"
+const data = JSON.parse("{\"path\":\"/\",\"title\":\"Linux兵工厂\",\"lang\":\"en-US\",\"frontmatter\":{},\"git\":{\"updatedTime\":1773459156000,\"contributors\":[{\"name\":\"linuxarsenal\",\"username\":\"linuxarsenal\",\"email\":\"tgdzsjh@163.com\",\"commits\":1,\"url\":\"https://github.com/linuxarsenal\"}],\"changelog\":[{\"hash\":\"38928885c3e6ffef034554dd31eed2d4f37bce0b\",\"time\":1773459156000,\"email\":\"tgdzsjh@163.com\",\"author\":\"linuxarsenal\",\"message\":\"add vuepress project\"}]},\"filePathRelative\":\"README.md\"}")
+export { comp, data }
