@@ -4,9 +4,9 @@ import { defineUserConfig } from 'vuepress'
 
 export default defineUserConfig({
     base: '/',
-    language: 'zh-CN',
-    title: 'VuePress',
-    description: 'Vue-powered Static Site Generator',
+    lang: 'zh-CN',
+    title: 'LinuxArsenal',
+    description: 'Linux 技术分享',
     bundler: viteBundler(),
     theme: defaultTheme(),
 })
