@@ -66,3 +66,24 @@
     font-size: 0.87rem !important;
   }
 }
+
+
+// ===== 文章分类和标签字体调大 =====
+.vp-page-info,
+.page-info,
+.vp-meta {
+  // 分类和标签容器
+  .category,
+  .tag,
+  .vp-meta-tag,
+  .vp-meta-category {
+    font-size: 0.9rem !important;
+  }
+
+  // 标签样式
+  .tag-item,
+  .vp-tag {
+    font-size: 0.85rem !important;
+    padding: 2px 8px !important;
+  }
+}
