@@ -60,7 +60,7 @@
             </div>
             <span>公众号</span>
             <div class="rab-qr-popup">
-              <img src="/pics/logo1.png" alt="公众号" />
+              <img src="/pics/gzh.jpg" alt="公众号" />
               <p>扫码关注</p>
               <strong>Linux兵工厂</strong>
             </div>
