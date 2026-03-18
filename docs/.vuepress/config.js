@@ -90,6 +90,18 @@ export default defineUserConfig({
          * 按路径前缀分组
          */
         sidebar: {
+            /* 根路径和未匹配路径的默认侧边栏 */
+            '/': [
+                {
+                    text: '快速导航',
+                    icon: 'home',
+                    children: [
+                        { text: '首页', link: '/' },
+                        { text: '关于', link: '/about/' },
+                    ],
+                },
+            ],
+
             /* /os/ 路径下的页面侧边栏 */
             '/os/': [
                 /* 第一项：章节概述
@@ -170,6 +182,17 @@ export default defineUserConfig({
                     collapsible: true,
                     children: [
                         { text: '字符设备驱动', link: 'char-device' },
+                    ],
+                },
+            ],
+
+            /* /about/ 路径下的页面侧边栏 */
+            '/about/': [
+                {
+                    text: '关于',
+                    icon: 'info',
+                    children: [
+                        { text: '关于作者', link: '/about/' },
                     ],
                 },
             ],
