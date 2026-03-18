@@ -10,11 +10,11 @@ export default defineUserConfig({
     bundler: viteBundler(),
 
     head: [
-        ['link', { rel: 'icon', href: '/pics/logo1.png' }],
+        ['link', { rel: 'icon', href: '/pics/logo.png' }],
     ],
 
     theme: hopeTheme({
-        logo: '/pics/logo1.png',
+        logo: '/pics/logo.png',
         docsDir: 'docs',
         darkmode: 'toggle',
 
