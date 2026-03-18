@@ -6,7 +6,8 @@ This document provides guidelines for agents working on this VuePress documentat
 
 This is a VuePress 2 static documentation/blog site using:
 - VuePress 2 with Vite bundler
-- Default theme
+- VuePress Theme Hope (`vuepress-theme-hope`)
+- Sass for custom styling
 - Markdown content in `docs/` directory
 - Configuration in `docs/.vuepress/config.js`
 
@@ -32,9 +33,9 @@ pnpm install
 ```
 
 ### Testing
-There is currently **no test suite** configured for this project. The npm test script is a placeholder:
+There is currently **no test suite** configured for this project.
 ```bash
-pnpm test  # Echoes "Error: no test specified" and exits with code 1
+pnpm test  # Echoes "Error: no test specified" && exit 1
 ```
 
 ### Linting
@@ -42,17 +43,7 @@ No linting is configured for this project.
 
 ### Running a Single Test (when tests are added)
 ```bash
-# Generic approach
 pnpm test -- <test-file>
-
-# With vitest
-pnpm vitest run <test-file>
-
-# With jest
-pnpm jest <test-file>
-
-# With mocha
-pnpm mocha <test-file>
 ```
 
 ---
@@ -64,6 +55,7 @@ pnpm mocha <test-file>
 - Use ESM syntax (`import`/`export`) in config files
 - Follow VuePress 2 best practices from official documentation
 - Write clean, readable code with descriptive names
+- Avoid unnecessary comments; code should be self-documenting
 
 ### Configuration File (config.js)
 
@@ -71,14 +63,24 @@ The main configuration is in `docs/.vuepress/config.js`. Use this structure:
 
 ```javascript
 import { viteBundler } from '@vuepress/bundler-vite'
-import { defaultTheme } from '@vuepress/theme-default'
 import { defineUserConfig } from 'vuepress'
+import { hopeTheme } from 'vuepress-theme-hope'
 
 export default defineUserConfig({
     base: '/',
+    lang: 'zh-CN',
+    title: 'SiteTitle',
+    description: 'Description',
     bundler: viteBundler(),
-    theme: defaultTheme(),
-    // Add plugins, custom styles, etc. here
+    theme: hopeTheme({
+        logo: '/pics/logo.png',
+        docsDir: 'docs',
+        darkmode: 'toggle',
+        navbar: [...],
+        sidebar: {...},
+        plugins: {...},
+        markdown: {...},
+    }),
 })
 ```
 
@@ -87,8 +89,9 @@ export default defineUserConfig({
 - Use named imports where possible
 - Example:
 ```javascript
-import { foo } from 'external-package'
-import { bar } from './local-module'
+import { viteBundler } from '@vuepress/bundler-vite'
+import { defineUserConfig } from 'vuepress'
+import { hopeTheme } from 'vuepress-theme-hope'
 ```
 
 ### Naming Conventions
@@ -116,12 +119,7 @@ import { bar } from './local-module'
 - Keep headings hierarchical (H1 -> H2 -> H3)
 - Use relative links for internal navigation
 - Code blocks should specify language for syntax highlighting
-
-### GitHub Actions Workflow
-The project uses GitHub Actions (`.github/workflows/docs.yml`):
-- Triggers on push to `main` branch
-- Uses Node.js 22, pnpm
-- Builds to `gh-pages` branch
+- Supported markdown extensions: align, attrs, mark, spoiler, sub, sup, tasklist
 
 ---
 
@@ -132,7 +130,7 @@ The project uses GitHub Actions (`.github/workflows/docs.yml`):
 ├── docs/
 │   ├── .vuepress/
 │   │   ├── config.js      # Main VuePress configuration
-│   │   ├── dist/          # Built output
+│   │   ├── dist/          # Built output (do not edit)
 │   │   ├── .cache/       # Build cache
 │   │   └── .temp/        # Temporary build files
 │   ├── README.md         # Home page content
@@ -143,13 +141,53 @@ The project uses GitHub Actions (`.github/workflows/docs.yml`):
 
 ---
 
+## Theme Configuration (vuepress-theme-hope)
+
+Key theme options used in this project:
+- `navbar`: Top navigation links
+- `sidebar`: Sidebar navigation (supports prefix, collapsible groups)
+- `pageInfo`: Display Author, Date, ReadingTime, Category, Tag
+- `footer`: Site-wide footer text
+- `plugins`: markdownImage, markdownTab, etc.
+- `markdown`: Enable extended markdown syntax
+
+### Sidebar Pattern
+```javascript
+sidebar: {
+    '/os/': [
+        {
+            text: 'Section Name',
+            icon: 'icon-name',
+            prefix: '/os/topic/',
+            collapsible: true,
+            children: [
+                { text: 'Page Title', link: 'page-slug' },
+            ],
+        },
+    ],
+}
+```
+
+---
+
+## GitHub Actions Workflow
+
+The project uses GitHub Actions (`.github/workflows/docs.yml`):
+- Triggers on push to `main` branch
+- Uses Node.js 22, pnpm
+- Builds to `gh-pages` branch
+- Build output: `docs/.vuepress/dist`
+
+---
+
 ## Best Practices for Modifications
 
 1. **Before building**: Ensure all markdown links are valid
-2. **Adding pages**: Create `.md` files in `docs/` directory
+2. **Adding pages**: Create `.md` files in `docs/` directory with proper frontmatter
 3. **Customization**: Add plugins/styles in `config.js`
 4. **Testing changes**: Run `pnpm docs:dev` locally first
 5. **Deployment**: Push to main triggers automatic build via GitHub Actions
+6. **Build issues**: Clear `.cache` and `.temp` folders if problems occur
 
 ---
 
@@ -159,6 +197,6 @@ The project uses GitHub Actions (`.github/workflows/docs.yml`):
 - No unit/integration tests exist
 - No linting configured
 - Custom theme modifications should be added to `docs/.vuepress/styles/`
-- Frontmatter in markdown files controls page metadata (title, description, etc.)
+- Frontmatter controls page metadata (title, description, date, tags, etc.)
 - Always test changes locally with `pnpm docs:dev` before committing
-- Clear `.cache` and `.temp` folders if you encounter build issues
+- The site uses Chinese language (lang: 'zh-CN')
