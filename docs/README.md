@@ -4,7 +4,7 @@ icon: home
 title: 首页
 heroText: Linux兵工厂
 tagline: 嵌入式Linux技术分享 | 驱动开发 | 操作系统 | 网络编程
-heroImage: /pics/logo1.png
+heroImage: /pics/logo.png
 heroImageStyle:
   width: 200px
   borderRadius: 50%
