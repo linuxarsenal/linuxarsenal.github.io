@@ -100,13 +100,13 @@ const tocVisible   = ref(false)
 const sidebarHidden = ref(false)
 
 onMounted(() => {
-  isDark.value = document.documentElement.classList.contains('dark')
+  isDark.value = document.documentElement.getAttribute('data-theme') === 'dark'
 })
 
 function toggleDark() {
   isDark.value = !isDark.value
-  document.documentElement.classList.toggle('dark', isDark.value)
-  localStorage.setItem('vuepress-color-scheme', isDark.value ? 'dark' : 'light')
+  document.documentElement.setAttribute('data-theme', isDark.value ? 'dark' : 'light')
+  localStorage.setItem('vuepress-theme-hope-scheme', isDark.value ? 'dark' : 'light')
 }
 
 function toggleToc() {
@@ -156,7 +156,7 @@ body.rab-hide-toc .vp-toc-placeholder {
   gap: 2px;
 }
 
-:global(html.dark) .rab-bar {
+:global([data-theme="dark"]) .rab-bar {
   background: #1e1e2e;
   border-color: rgba(255,255,255,.08);
   box-shadow: -4px 0 20px rgba(0,0,0,.4);
@@ -181,7 +181,7 @@ body.rab-hide-toc .vp-toc-placeholder {
   background: rgba(0,0,0,.04);
 }
 
-:global(html.dark) .rab-item:hover {
+:global([data-theme="dark"]) .rab-item:hover {
   background: rgba(255,255,255,.06);
 }
 
@@ -213,7 +213,7 @@ body.rab-hide-toc .vp-toc-placeholder {
   font-weight: 500;
 }
 
-:global(html.dark) .rab-item span {
+:global([data-theme="dark"]) .rab-item span {
   color: #999;
 }
 
@@ -225,7 +225,7 @@ body.rab-hide-toc .vp-toc-placeholder {
   flex-shrink: 0;
 }
 
-:global(html.dark) .rab-divider {
+:global([data-theme="dark"]) .rab-divider {
   background: rgba(255,255,255,.08);
 }
 
@@ -249,7 +249,7 @@ body.rab-hide-toc .vp-toc-placeholder {
   z-index: 10001;
 }
 
-:global(html.dark) .rab-qr-popup {
+:global([data-theme="dark"]) .rab-qr-popup {
   background: #1e1e2e;
   border-color: rgba(255,255,255,.1);
 }
@@ -278,7 +278,7 @@ body.rab-hide-toc .vp-toc-placeholder {
   color: #333;
 }
 
-:global(html.dark) .rab-qr-popup strong {
+:global([data-theme="dark"]) .rab-qr-popup strong {
   color: #ddd;
 }
 
@@ -303,7 +303,7 @@ body.rab-hide-toc .vp-toc-placeholder {
   border-left-color: #fff;
 }
 
-:global(html.dark) .rab-qr-popup::after {
+:global([data-theme="dark"]) .rab-qr-popup::after {
   border-left-color: #1e1e2e;
 }
 
