@@ -1,93 +1,95 @@
 <template>
-  <Teleport to="body">
-    <div class="rab-wrap">
-      <div class="rab-bar">
+  <ClientOnly>
+    <Teleport to="body">
+      <div class="rab-wrap">
+        <div class="rab-bar">
 
-        <!-- 目录 -->
-        <div class="rab-item" @click="toggleToc" :class="{ active: tocVisible }" title="文章目录">
-          <div class="rab-icon" style="background:#e8f4fd;color:#3b82f6">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="16" y2="12"/><line x1="3" y1="18" x2="19" y2="18"/>
-            </svg>
+          <!-- 目录 -->
+          <div class="rab-item" @click="toggleToc" :class="{ active: tocVisible }" title="文章目录">
+            <div class="rab-icon" style="background:#e8f4fd;color:#3b82f6">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="16" y2="12"/><line x1="3" y1="18" x2="19" y2="18"/>
+              </svg>
+            </div>
+            <span>目录</span>
           </div>
-          <span>目录</span>
+
+          <!-- 侧边栏 -->
+          <div class="rab-item" @click="toggleSidebar" :class="{ active: sidebarHidden }" title="切换侧边栏">
+            <div class="rab-icon" style="background:#edf2ff;color:#6366f1">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                <template v-if="!sidebarHidden">
+                  <polyline points="15 18 9 12 15 6"/>
+                  <polyline points="11 18 5 12 11 6"/>
+                </template>
+                <template v-else>
+                  <polyline points="9 18 15 12 9 6"/>
+                  <polyline points="13 18 19 12 13 6"/>
+                </template>
+              </svg>
+            </div>
+            <span>侧边栏</span>
+          </div>
+
+          <div class="rab-divider"></div>
+
+          <!-- 夜间模式 -->
+          <div class="rab-item" @click="toggleDark" title="夜间模式">
+            <div class="rab-icon" :style="isDark
+              ? 'background:#1e1b4b;color:#a5b4fc'
+              : 'background:#fef3c7;color:#f59e0b'">
+              <svg v-if="!isDark" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+              <svg v-else viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+              </svg>
+            </div>
+            <span>{{ isDark ? '日间' : '夜间' }}</span>
+          </div>
+
+          <div class="rab-divider"></div>
+
+          <!-- 公众号 -->
+          <div class="rab-item rab-qr-host" title="关注公众号">
+            <div class="rab-icon" style="background:#e6f9f0;color:#07c160">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9.5 4C5.36 4 2 6.69 2 10c0 1.89 1.08 3.56 2.78 4.66L4 17l2.47-1.32A8.7 8.7 0 0 0 9.5 16c.17 0 .34 0 .5-.01A5.52 5.52 0 0 1 9.5 14c0-3.04 2.69-5.5 6-5.5.18 0 .35.01.52.02C15.29 6.13 12.65 4 9.5 4zm8.5 6.5c-2.76 0-5 1.79-5 4s2.24 4 5 4c.62 0 1.22-.1 1.77-.28L22 19.5l-.63-2.11A3.67 3.67 0 0 0 23 14.5c0-2.21-2.24-4-5-4z"/>
+              </svg>
+            </div>
+            <span>公众号</span>
+            <div class="rab-qr-popup">
+              <img src="/pics/logo1.png" alt="公众号" />
+              <p>扫码关注</p>
+              <strong>Linux兵工厂</strong>
+            </div>
+          </div>
+
+          <!-- GitHub -->
+          <a class="rab-item" href="https://github.com" target="_blank" rel="noopener" title="GitHub">
+            <div class="rab-icon" style="background:#f0f0f0;color:#24292e">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.1 3.29 9.42 7.86 10.95.58.1.79-.25.79-.56v-2.04c-3.2.69-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98.01 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.28 5.69.42.36.79 1.07.79 2.16v3.2c0 .31.21.67.8.56C20.21 21.41 23.5 17.1 23.5 12 23.5 5.73 18.27.5 12 .5z"/>
+              </svg>
+            </div>
+            <span>GitHub</span>
+          </a>
+
+          <!-- 返回顶部 -->
+          <div class="rab-item" @click="scrollToTop" title="返回顶部">
+            <div class="rab-icon" style="background:#fff0f0;color:#ef4444">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"/>
+              </svg>
+            </div>
+            <span>顶部</span>
+          </div>
+
         </div>
-
-        <!-- 侧边栏 -->
-        <div class="rab-item" @click="toggleSidebar" :class="{ active: sidebarHidden }" title="切换侧边栏">
-          <div class="rab-icon" style="background:#edf2ff;color:#6366f1">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-              <template v-if="!sidebarHidden">
-                <polyline points="15 18 9 12 15 6"/>
-                <polyline points="11 18 5 12 11 6"/>
-              </template>
-              <template v-else>
-                <polyline points="9 18 15 12 9 6"/>
-                <polyline points="13 18 19 12 13 6"/>
-              </template>
-            </svg>
-          </div>
-          <span>侧边栏</span>
-        </div>
-
-        <div class="rab-divider"></div>
-
-        <!-- 夜间模式 -->
-        <div class="rab-item" @click="toggleDark" title="夜间模式">
-          <div class="rab-icon" :style="isDark
-            ? 'background:#1e1b4b;color:#a5b4fc'
-            : 'background:#fef3c7;color:#f59e0b'">
-            <svg v-if="!isDark" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-            </svg>
-            <svg v-else viewBox="0 0 24 24" fill="currentColor">
-              <circle cx="12" cy="12" r="4"/>
-              <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-            </svg>
-          </div>
-          <span>{{ isDark ? '日间' : '夜间' }}</span>
-        </div>
-
-        <div class="rab-divider"></div>
-
-        <!-- 公众号 -->
-        <div class="rab-item rab-qr-host" title="关注公众号">
-          <div class="rab-icon" style="background:#e6f9f0;color:#07c160">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M9.5 4C5.36 4 2 6.69 2 10c0 1.89 1.08 3.56 2.78 4.66L4 17l2.47-1.32A8.7 8.7 0 0 0 9.5 16c.17 0 .34 0 .5-.01A5.52 5.52 0 0 1 9.5 14c0-3.04 2.69-5.5 6-5.5.18 0 .35.01.52.02C15.29 6.13 12.65 4 9.5 4zm8.5 6.5c-2.76 0-5 1.79-5 4s2.24 4 5 4c.62 0 1.22-.1 1.77-.28L22 19.5l-.63-2.11A3.67 3.67 0 0 0 23 14.5c0-2.21-2.24-4-5-4z"/>
-            </svg>
-          </div>
-          <span>公众号</span>
-          <div class="rab-qr-popup">
-            <img src="/pics/logo1.png" alt="公众号" />
-            <p>扫码关注</p>
-            <strong>Linux兵工厂</strong>
-          </div>
-        </div>
-
-        <!-- GitHub -->
-        <a class="rab-item" href="https://github.com" target="_blank" rel="noopener" title="GitHub">
-          <div class="rab-icon" style="background:#f0f0f0;color:#24292e">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.1 3.29 9.42 7.86 10.95.58.1.79-.25.79-.56v-2.04c-3.2.69-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98.01 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.28 5.69.42.36.79 1.07.79 2.16v3.2c0 .31.21.67.8.56C20.21 21.41 23.5 17.1 23.5 12 23.5 5.73 18.27.5 12 .5z"/>
-            </svg>
-          </div>
-          <span>GitHub</span>
-        </a>
-
-        <!-- 返回顶部 -->
-        <div class="rab-item" @click="scrollToTop" title="返回顶部">
-          <div class="rab-icon" style="background:#fff0f0;color:#ef4444">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="18 15 12 9 6 15"/>
-            </svg>
-          </div>
-          <span>顶部</span>
-        </div>
-
       </div>
-    </div>
-  </Teleport>
+    </Teleport>
+  </ClientOnly>
 </template>
 
 <script setup>
@@ -133,7 +135,6 @@ body.rab-hide-toc .vp-toc-placeholder {
 </style>
 
 <style scoped>
-/* ===== 外层定位容器 ===== */
 .rab-wrap {
   position: fixed;
   right: 0;
@@ -142,7 +143,6 @@ body.rab-hide-toc .vp-toc-placeholder {
   z-index: 9999;
 }
 
-/* ===== 主卡片 ===== */
 .rab-bar {
   display: flex;
   flex-direction: column;
@@ -156,14 +156,12 @@ body.rab-hide-toc .vp-toc-placeholder {
   gap: 2px;
 }
 
-/* 深色模式卡片 */
 :global(html.dark) .rab-bar {
   background: #1e1e2e;
   border-color: rgba(255,255,255,.08);
   box-shadow: -4px 0 20px rgba(0,0,0,.4);
 }
 
-/* ===== 每一项 ===== */
 .rab-item {
   display: flex;
   flex-direction: column;
@@ -187,7 +185,6 @@ body.rab-hide-toc .vp-toc-placeholder {
   background: rgba(255,255,255,.06);
 }
 
-/* ===== 彩色圆形图标 ===== */
 .rab-icon {
   width: 36px;
   height: 36px;
@@ -208,7 +205,6 @@ body.rab-hide-toc .vp-toc-placeholder {
   height: 18px;
 }
 
-/* ===== 文字标签 ===== */
 .rab-item span {
   font-size: 10.5px;
   line-height: 1;
@@ -221,7 +217,6 @@ body.rab-hide-toc .vp-toc-placeholder {
   color: #999;
 }
 
-/* ===== 分割线 ===== */
 .rab-divider {
   width: 36px;
   height: 1px;
@@ -234,7 +229,6 @@ body.rab-hide-toc .vp-toc-placeholder {
   background: rgba(255,255,255,.08);
 }
 
-/* ===== 公众号 QR 弹出 ===== */
 .rab-qr-host {
   position: relative;
 }
@@ -288,7 +282,6 @@ body.rab-hide-toc .vp-toc-placeholder {
   color: #ddd;
 }
 
-/* 小三角箭头 */
 .rab-qr-popup::before {
   content: '';
   position: absolute;
@@ -314,7 +307,6 @@ body.rab-hide-toc .vp-toc-placeholder {
   border-left-color: #1e1e2e;
 }
 
-/* ===== 移动端隐藏 ===== */
 @media (max-width: 959px) {
   .rab-wrap {
     display: none;
