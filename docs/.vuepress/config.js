@@ -19,14 +19,16 @@ export default defineUserConfig({
         darkmode: 'toggle',
 
         plugins: {
-            icon: true,
+            icon: {
+                prefix: 'fa-solid fa-',
+            },
         },
 
         navbar: [
-            { text: '首页', link: '/', icon: 'home' },
-            { text: '操作系统', link: '/os/', icon: 'computer' },
-            { text: '嵌入式Linux', link: '/embedded/', icon: 'code' },
-            { text: '关于', link: '/about/', icon: 'info' },
+            { text: '首页', link: '/', icon: 'house' },
+            { text: '操作系统', link: '/os/', icon: 'desktop' },
+            { text: '嵌入式Linux', link: '/embedded/', icon: 'microchip' },
+            { text: '关于', link: '/about/', icon: 'circle-info' },
         ],
 
         sidebar: {
