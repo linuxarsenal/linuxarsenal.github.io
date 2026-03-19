@@ -18,6 +18,10 @@ export default defineUserConfig({
         docsDir: 'docs',
         darkmode: 'toggle',
 
+        plugins: {
+            icon: true,
+        },
+
         navbar: [
             { text: '首页', link: '/', icon: 'home' },
             { text: '操作系统', link: '/os/', icon: 'computer' },
