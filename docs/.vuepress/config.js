@@ -11,6 +11,7 @@ export default defineUserConfig({
 
     head: [
         ['link', { rel: 'icon', href: '/pics/logo.png' }],
+        ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' }],
     ],
 
     theme: hopeTheme({
@@ -25,10 +26,10 @@ export default defineUserConfig({
         },
 
         navbar: [
-            { text: '首页', link: '/', icon: 'house' },
+            { text: '首页', link: '/', icon: 'home' },
             { text: '操作系统', link: '/os/', icon: 'desktop' },
             { text: '嵌入式Linux', link: '/embedded/', icon: 'microchip' },
-            { text: '关于', link: '/about/', icon: 'circle-info' },
+            { text: '关于', link: '/about/', icon: 'info' },
         ],
 
         sidebar: {
