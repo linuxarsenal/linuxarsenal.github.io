@@ -20,7 +20,7 @@ export default defineUserConfig({
 
         plugins: {
             icon: {
-                type: 'fontawesome',
+                assets: 'fontawesome',
             },
         },
 
