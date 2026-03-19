@@ -11,7 +11,6 @@ export default defineUserConfig({
 
     head: [
         ['link', { rel: 'icon', href: '/pics/logo.png' }],
-        ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' }],
     ],
 
     theme: hopeTheme({
@@ -21,7 +20,7 @@ export default defineUserConfig({
 
         plugins: {
             icon: {
-                prefix: 'fa-solid fa-',
+                type: 'fontawesome',
             },
         },
 
